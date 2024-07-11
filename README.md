@@ -14,7 +14,7 @@ Programming language: TypeScript
 
 Name of the tool: jslint
 
-Command for coverage: `$ yarn test --coverage` \
+Command for coverage: `yarn test --coverage` \
 Command for the testfile: `yarn test error.test.ts`
 
 Screenshot of result, overall coverage All Files:<br/>
@@ -97,7 +97,7 @@ New Coverage, SRC files:
 
 
 
-As is seen in the screenshots, the coverage in that particular file ZoddError.ts was improved from 76% to 91.13%., statement coverage from 85.93% to 95.91%, function coverage from 81.25% to 93.96%. If one checks the lines that were missing before and compares it to the old code one can easily see that the missing lines(red) are now green, meaning tested. Out of 4 functions improved, 2 (function 2 & function 4) of them had if branches, going from 0%  branch coverage to 100%(see that they are not red anymore). 
+As is seen in the screenshots, the coverage in that particular file ZoddError.ts was improved from 76% to 91.13%., statement coverage from 85.93% to 95.91%, function coverage from 81.25% to 93.96%. If one checks the lines that were missing before and compares it to the old code one can easily see that the missing lines(red) are now green, meaning tested. Out of 4 functions improved, 2 (function 2 & function 4) of them had if branches, improving both of them on matters of branch coverage to 100%(see that they are not red anymore) from below 100%(they had missing/red lines). 
 
 Overall in all files, we have improved: statement coverage 95.53% to 95.91%, function coverage 93.43% to 93.96%, branch coverage 90.55% to 91.13%.
 
