@@ -14,58 +14,93 @@ Programming language: TypeScript
 
 Name of the tool: jslint
 
-Command: `$ yarn test --coverage   `
+Command for coverage: `$ yarn test --coverage` \
+Command for the testfile: `yarn test error.test.ts`
 
-Screenshot of result, overall coverage:<br/>
+Screenshot of result, overall coverage All Files:<br/>
 ![alt text](Photos/OG_coverage.png)
-Screenshot of result, overall coverage of the file we are going to modify:<br/>
+Screenshot of result, overall coverage of the file we are going to modify, SRC files:<br/>
 ![alt text](Photos/OG_coverage2.png)
 
 
 ## Coverage improvement
 ### Individual Tests
 
-Function1 name: setup_logging() (in src/borg/logger.py)
+Function1 name: toString() (in src\ZodError.ts)
 
-Link to commit: https://github.com/AlexandruMititelu/A1.1-SEP-RESIT/commit/b1e85b473ddd7a0569d2cf721af43170ba145037
-
-Screenshot of before :<br/> 
-![alt text](image-2.png)
-Screenshot of after:<br/> 
-![alt text](image-2.png)
-
-Function2 name: do_help() (in src/borg/archiver/help_cmd.py)
-
-Link to commit: https://github.com/AlexandruMititelu/A1.1-SEP-RESIT/commit/b1e85b473ddd7a0569d2cf721af43170ba145037
+Link to commit: https://github.com/AlexandruMititelu/A1.1-SEP-RESIT/commit/b1e85b473ddd7a0569d2cf721af43170ba145037#diff-963488388f2d2a25e911faefec356261084f012195e56a66c6ff7194e55f9cf7
 
 Screenshot of before :<br/> 
-![alt text](image-2.png)
+![alt text](Photos/toString_before.png)
 Screenshot of after:<br/> 
-![alt text](image-2.png)
+![alt text](Photos/toString_after.png)
 
+Overall SRC coverage after this improvement:
+![alt text](Photos/overall_after_toString.png)
 
-As is easily visible from the screenshots, the coverage in that particular file was improved from 78% to 82%. This can be attributed to the fact that a specific test that is meant to trigger the 'branch 2' of the function was added to the already existing tests in the testsuite. This 'test_setup_logging_with_config_file()' test is testing the setting up of a logger when a config file is provided to the function and this is a conditional branch that was not tested before. To test this a temporary config file was written and provided to the setup function (another function had to be adapted slightly as well). Furthermore in the screenshot one can see that this 'branch 2' is now being reached thanks to the additional test and even the already existent coverage measurement tool reports an increase in coverage in that specific file.
+#
+Function2 name: assert(value: unknown) (in src\ZodError.ts)
 
+Link to commit: https://github.com/AlexandruMititelu/A1.1-SEP-RESIT/commit/b1e85b473ddd7a0569d2cf721af43170ba145037#diff-963488388f2d2a25e911faefec356261084f012195e56a66c6ff7194e55f9cf7
+
+Screenshot of before :<br/> 
+![alt text](Photos/assert_before.png)
+Screenshot of after:<br/> 
+![alt text](Photos/assert_after.png)
+
+Overall coverage after this improvement:
+![alt text](Photos/overall_after_assert.png)
+
+Overall branch coverage improved by 4% in the ZoddErro.js file, to 80%. 100% of the function branches have been covered. It works because when the function is called, it expects to throw an error with the message that we gave.
+
+#
+Function3 name: get errors() (in src\ZodError.ts)
+
+Link to commit: https://github.com/AlexandruMititelu/A1.1-SEP-RESIT/commit/377b96c5acc8fe16e064466f6d379c49802d9d7e
+
+Screenshot of before :<br/> 
+![alt text](Photos/get_errors_before.png)
+Screenshot of after:<br/> 
+![alt text](Photos/get_errors_after.png)
+
+Overall coverage after this improvement:
+![alt text](Photos/overall_after_get_errors.png)
+
+#
+Function4 name:  format(_mapper?: any) (in src\ZodError.ts)
+
+Link to commit: https://github.com/AlexandruMititelu/A1.1-SEP-RESIT/commit/1ae47f0621ab78c9a3e1de83bba90fb7dca335f8#diff-963488388f2d2a25e911faefec356261084f012195e56a66c6ff7194e55f9cf7
+
+Screenshot of before :<br/> 
+![alt text](Photos/mapper_before.png)
+Screenshot of after:<br/> 
+![alt text](Photos/mapper_after.png)
+
+Overall coverage after this improvement:
+![alt text](Photos/SRC_Coverage_Final.png)
+
+Overall branch coverage improved by 12% in the ZoddErro.js file, to 92%. 100% of the function branches have been covered. It works because for every covered branch, when format is called with a specific mapper, it will return the error message that we gave.
+#
 ### Overall
 
-Screenshot of result, overall coverage:<br/>
+Screenshot of original result, overall coverage All Files:<br/>
 ![alt text](Photos/OG_coverage.png)
-Screenshot of result, overall coverage of the file we are going to modify:<br/>
+Screenshot of result, overall coverage of the file we have modified in SRC:<br/>
 ![alt text](Photos/OG_coverage2.png)
 
 
-Tool coverage measurement (old):<br/>
-![alt text](image-10.png)
+New Coverage, All files:
+![alt text](Photos/SRC_Coverage_Final.png)
 
-Tool coverage measurement (new):<br/>
-![alt text](image-11.png)
+New Coverage, SRC files:
+![alt text](Photos/SRC_Coverage_Final.png)
 
-As is seen in the screenshots, the coverage in that particular file was improved from 85% to 100%. If one checks the lines that were missing before and compares it to the old code (before the manual branch logging was added) one can easily see that the missing lines correspond to one specific else branch. This can also be seen in the manual logging that all code except this one else statement (in the file but also every branch in this specific function) is reached by the tests. This else-statement corresponds to there not being helpful documentation for the topic the person is invoking the help command for. The tests show an easy improvement being made by trying to invoke the help command with a topic that is not in the documentation in the same manner the already existing tests did. This enhanced the coverage as now every branch of every function in that file is being hit with the test cases.
 
-### Overall
 
-Old coverage result:<br/>
-![alt text](image-1.png)
+As is seen in the screenshots, the coverage in that particular file ZoddError.ts was improved from 76% to 91.13%., statement coverage from 85.93% to 95.91%, function coverage from 81.25% to 93.96%. If one checks the lines that were missing before and compares it to the old code one can easily see that the missing lines(red) are now green, meaning tested. Out of 4 functions improved, 2 (function 2 & function 4) of them had if branches, going from 0%  branch coverage to 100%(see that they are not red anymore). 
+
+Overall in all files, we have improved: statement coverage 95.53% to 95.91%, function coverage 93.43% to 93.96%, branch coverage 90.55% to 91.13%.
+
 
 Link to the slides:
 https://docs.google.com/presentation/d/1FqbQYH7BRJwMV4EC2VnmxTNJajOnKH8YlXyUeRCZzvY/edit?usp=drive_link
