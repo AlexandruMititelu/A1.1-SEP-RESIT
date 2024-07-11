@@ -588,19 +588,19 @@ test("assert throws error when received value is not ZodError type", () => {
   expect(() => ZodError.assert(err)).toThrow("Not a ZodError: Error: lala");
 });
 
-// test("toString returns the proper message", () => {
-//   const err = ZodError.create([]);
-//   err.addIssue({
-//     code: ZodIssueCode.invalid_type,
-//     expected: ZodParsedType.object,
-//     received: ZodParsedType.string,
-//     path: [],
-//     message: "lalalala",
-//     fatal: true,
-//   });
+test("errors getter returns the proper number of errors", () => {
+  const err = ZodError.create([]);
+  err.addIssue({
+    code: ZodIssueCode.invalid_type,
+    expected: ZodParsedType.object,
+    received: ZodParsedType.string,
+    path: [],
+    message: "lalalala",
+    fatal: true,
+  });
 
-//   expect();
-// });
+  expect(err.errors).toHaveLength(1);
+});
 
 // test("dont short circuit on continuable errors", () => {
 //   const user = z
