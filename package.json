@@ -30,7 +30,6 @@
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "eslint-plugin-unused-imports": "^2.0.0",
-    "husky": "^7.0.4",
     "jest": "^29.3.1",
     "lint-staged": "^12.3.7",
     "netlify-cli": "^17.26.2",
@@ -117,10 +116,5 @@
       "npm-funding": true
     }
   },
-  "types": "./index.d.ts",
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm test"
-    }
-  }
+  "types": "./index.d.ts"
 }
