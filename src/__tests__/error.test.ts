@@ -557,6 +557,51 @@ test("when the message is falsy, it is used as is provided", () => {
   }
 });
 
+test("toString returns the proper message", () => {
+  const err = ZodError.create([]);
+  err.addIssue({
+    code: ZodIssueCode.invalid_type,
+    expected: ZodParsedType.object,
+    received: ZodParsedType.string,
+    path: [],
+    message: "lalalala",
+    fatal: true,
+  });
+
+  const expectedError = [
+    {
+      code: "invalid_type",
+      expected: "object",
+      received: "string",
+      path: [],
+      message: "lalalala",
+      fatal: true,
+    },
+  ];
+
+  expect(err.toString()).toBe(JSON.stringify(expectedError, null, 2));
+});
+
+test("assert throws error when received value is not ZodError type", () => {
+  const err = new Error("lala");
+
+  expect(() => ZodError.assert(err)).toThrow("Not a ZodError: Error: lala");
+});
+
+// test("toString returns the proper message", () => {
+//   const err = ZodError.create([]);
+//   err.addIssue({
+//     code: ZodIssueCode.invalid_type,
+//     expected: ZodParsedType.object,
+//     received: ZodParsedType.string,
+//     path: [],
+//     message: "lalalala",
+//     fatal: true,
+//   });
+
+//   expect();
+// });
+
 // test("dont short circuit on continuable errors", () => {
 //   const user = z
 //     .object({
