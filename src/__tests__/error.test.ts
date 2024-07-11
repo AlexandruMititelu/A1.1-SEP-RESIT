@@ -602,6 +602,89 @@ test("errors getter returns the proper number of errors", () => {
   expect(err.errors).toHaveLength(1);
 });
 
+test("format correctly processes invalid_union issue", () => {
+  const err = ZodError.create([]);
+  const err1 = ZodError.create([]);
+
+  err1.addIssue({
+    code: ZodIssueCode.invalid_type,
+    expected: ZodParsedType.object,
+    received: ZodParsedType.string,
+    path: [],
+    message: "lalalala",
+    fatal: true,
+  });
+
+  err.addIssue({
+    code: ZodIssueCode.invalid_union,
+    path: [],
+    message: "lalalala",
+    unionErrors: [err1],
+  });
+
+  const mapper = () => {
+    return "Error: lalala";
+  };
+
+  expect(err.format(mapper)).toEqual({ _errors: ["Error: lalala"] });
+});
+
+test("format correctly processes invalid_return_type issue", () => {
+  const err = ZodError.create([]);
+  const err1 = ZodError.create([]);
+
+  err1.addIssue({
+    code: ZodIssueCode.invalid_type,
+    expected: ZodParsedType.object,
+    received: ZodParsedType.string,
+    path: [],
+    message: "lalalala",
+    fatal: true,
+  });
+
+  err.addIssue({
+    code: ZodIssueCode.invalid_return_type,
+    returnTypeError: err1,
+    path: [],
+    message: "lalalala",
+    fatal: true,
+  });
+
+  const mapper = () => {
+    return "Error: lalala";
+  };
+
+  expect(err.format(mapper)).toEqual({ _errors: ["Error: lalala"] });
+});
+
+test("format correctly processes invalid_arguments issue", () => {
+  const err = ZodError.create([]);
+  const err1 = ZodError.create([]);
+
+  err1.addIssue({
+    code: ZodIssueCode.invalid_type,
+    expected: ZodParsedType.object,
+    received: ZodParsedType.string,
+    path: [],
+    message: "lalalala",
+    fatal: true,
+  });
+
+  err.addIssue({
+    code: ZodIssueCode.invalid_arguments,
+    argumentsError: err1,
+    path: [],
+    message: "lalalala",
+    fatal: true,
+  });
+
+  const mapper = () => {
+    return "Error: lalala";
+  };
+
+  expect(err.format(mapper)).toEqual({ _errors: ["Error: lalala"] });
+});
+
 // test("dont short circuit on continuable errors", () => {
 //   const user = z
 //     .object({
